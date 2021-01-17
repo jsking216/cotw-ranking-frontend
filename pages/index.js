@@ -5,7 +5,6 @@ import PodcastList from '../components/podcastList';
 import { fetchAPI } from "../lib/api";
 
 const Home = ({ podcasts, homepage }) => {
-  console.log(JSON.stringify(podcasts));
   return (
     <Layout categories={podcasts}>
       <Seo seo={homepage.seo} />

@@ -9,7 +9,7 @@ const Nav = ({ categories }) => {
           <ul className="uk-navbar-nav">
             <li>
               <Link href="/">
-                <a>Podcast Rankings</a>
+                Podcast Rankings
               </Link>
             </li>
           </ul>
