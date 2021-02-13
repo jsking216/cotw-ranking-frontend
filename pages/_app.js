@@ -1,6 +1,6 @@
 import App from "next/app";
 import Head from "next/head";
-import "../assets/css/style.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { createContext } from "react";
 import { getStrapiMedia } from "../lib/media";
 import { fetchAPI } from "../lib/api";
