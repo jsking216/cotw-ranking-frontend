@@ -5,7 +5,7 @@ const PodcastList = ({ podcasts }) => {
 
   return (
     <>
-      {podcasts.map((podcast) => (<Card podcast={podcast}></Card>))}
+      {podcasts.map((podcast) => (<Card podcast={podcast} key={podcast.id}></Card>))}
     </>
   );
 };

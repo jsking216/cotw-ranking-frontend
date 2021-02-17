@@ -1,9 +1,11 @@
-import Nav from "./nav";
+import Header from './header';
+import Footer from './footer';
 
-const Layout = ({ children, categories, seo }) => (
+const Layout = ({ children }) => (
   <>
-    <Nav categories={categories} />
+    <Header />
     {children}
+    <Footer />
   </>
 );
 

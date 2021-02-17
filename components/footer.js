@@ -3,11 +3,11 @@ import { Navbar } from 'react-bootstrap';
 
 const Footer = () => {
   return (
-    <Navbar fixed="bottom">
-      <Navbar.Brand href="/">Podcast Ratings</Navbar.Brand>
+    <Navbar bg="dark" variant="dark" fixed="bottom" >
+      <Navbar.Brand href="/">PoddyRater</Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
-        <Navbar.Text>
+        <Navbar.Text variant="dark">
           Built by: <a href="https://jarf.me">Joshua King</a>
         </Navbar.Text>
       </Navbar.Collapse>

@@ -8,12 +8,12 @@ const Card = ({ podcast }) => {
       <a className="uk-link-reset">
         <div className="uk-card uk-card-muted">
           <div className="uk-card-media-top">
-            <Image image={podcast.image} />
-          </div>
-          <div className="uk-card-body">
-            <p id="title" className="uk-text-medium">
+          <p id="title" className="uk-text-medium">
               {podcast.PodcastName}
             </p>
+          </div>
+          <div className="uk-card-body">
+            <Image image={podcast.image} />
             <Link href={podcast.PodcastUrl}>Listen here</Link>
           </div>
         </div>

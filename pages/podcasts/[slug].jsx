@@ -1,6 +1,9 @@
 import React from "react";
 import { fetchAPI } from "../../lib/api";
 import PodcastEpisodeList from '../../components/podcastEpisodeList';
+import Link from 'next/link';
+import Header from '../../components/header';
+import Footer from '../../components/footer';
 
 const PodcastDetailPage = ({ podcast }) => {
   const {
@@ -15,10 +18,13 @@ const PodcastDetailPage = ({ podcast }) => {
    } = podcast;
   return (
     <>
-      <h1>{PodcastName}</h1>
-      <h3>{PodcastUrl}</h3>
+      <Header />
+      <h1>
+        <Link href={PodcastUrl}>{PodcastName}</Link>
+      </h1>
       <p>{PodcastDescription}</p>
       <PodcastEpisodeList podcastEpisodes={podcast_episodes} />
+      <Footer />
     </>
   );
 };
