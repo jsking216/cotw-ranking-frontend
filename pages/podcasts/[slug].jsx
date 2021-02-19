@@ -1,9 +1,9 @@
 import React from "react";
 import { fetchAPI } from "../../lib/api";
-import PodcastEpisodeList from '../../components/podcastEpisodeList';
+import PodcastEpisodeList from '../../components/PodcastEpisodeList';
 import Link from 'next/link';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const PodcastDetailPage = ({ podcast }) => {
   const {

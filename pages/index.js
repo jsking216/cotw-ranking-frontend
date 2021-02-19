@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
-import PodcastList from '../components/podcastList';
+import Layout from "../components/Layout";
+import Seo from "../components/Seo";
+import PodcastList from '../components/PodcastList';
 import { fetchAPI } from "../lib/api";
 
 const Home = ({ podcasts, homepage }) => {

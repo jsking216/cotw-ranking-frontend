@@ -1,6 +1,6 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import EpisodeCard from './episodeCard';
+import EpisodeCard from './EpisodeCard';
 
 const PodcastEpisodeList = ({ podcastEpisodes }) => {
   return (
