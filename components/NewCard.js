@@ -6,12 +6,12 @@ const NewCard = ({ podcast }) => {
   const imageUrl = getStrapiMedia(podcast.image);
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={imageUrl} />
+      <a href={`/podcasts/${podcast.id}`}><Card.Img variant="top" src={imageUrl} /></a>
       <Card.Body>
         <Card.Title>{podcast.PodcastName}</Card.Title>
-        <Card.Text>{podcast.description}</Card.Text>
+        <Card.Text>{podcast.PodcastDescription}</Card.Text>
       </Card.Body>
-      <Card.Footer><Button variant="primary">Go somewhere</Button></Card.Footer>
+      <Card.Footer><Button variant="primary" href={`/podcasts/${podcast.id}`} block="true">Check it out</Button></Card.Footer>
     </Card>
   );
 };
