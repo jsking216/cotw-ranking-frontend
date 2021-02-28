@@ -1,11 +1,10 @@
 import React from "react";
 import { fetchAPI } from "../../lib/api";
+import Layout from '../../components/Layout';
 import PodcastEpisodeList from '../../components/PodcastEpisodeList';
 import Link from 'next/link';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 
-const PodcastDetailPage = ({ podcast }) => {
+const PodcastDetailPage = ({ podcast, reviews }) => {
   const {
     PodcastName,
     PodcastDescription,
@@ -17,24 +16,22 @@ const PodcastDetailPage = ({ podcast }) => {
     podcast_episodes,
    } = podcast;
   return (
-    <>
-      <Header />
+    <Layout>
       <h1>
         <Link href={PodcastUrl}>{PodcastName}</Link>
       </h1>
       <p>{PodcastDescription}</p>
-      <PodcastEpisodeList podcastEpisodes={podcast_episodes} />
-      <Footer />
-    </>
+      <PodcastEpisodeList podcastEpisodes={podcast_episodes} reviews={reviews}/>
+    </Layout>
   );
 };
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
-  const podcast = await fetchAPI(`/podcasts/${slug}`);
+  const [podcast, reviews] = await Promise.all([fetchAPI(`/podcasts/${slug}`), fetchAPI(`/podcast-episode-reviews?podcast=${slug}`)]);
 
   return {
-    props: { podcast },
+    props: { podcast, reviews },
     revalidate: 86400,
   };
 }

@@ -5,7 +5,7 @@ import { getStrapiMedia } from '../lib/media';
 const NewCard = ({ podcast }) => {
   const imageUrl = getStrapiMedia(podcast.image);
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '22rem' }}>
       <a href={`/podcasts/${podcast.id}`}><Card.Img variant="top" src={imageUrl} /></a>
       <Card.Body>
         <Card.Title>{podcast.PodcastName}</Card.Title>
