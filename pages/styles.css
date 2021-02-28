@@ -1,0 +1,27 @@
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+a, a:hover, a:visited, a:link, a:active
+{
+  color: darkviolet;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: darkviolet;
+  border-color: darkviolet;
+}
+
+.container {
+  background-color: #e5e4e2;
+}
+
+#title {
+  font-weight: 600;
+}

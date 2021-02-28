@@ -8,7 +8,6 @@ const Home = ({ podcasts, homepage }) => {
   return (
     <Layout categories={podcasts}>
       <Seo seo={homepage.seo} />
-      <h1>{homepage.hero.title}</h1>
       <PodcastList podcasts={podcasts} />
     </Layout>
   );
