@@ -6,7 +6,6 @@ import { Breadcrumb } from 'react-bootstrap'
 
 
 const EpisodeDetailPage = ({ episode, review }) => {
-  console.log
   return (
     <Layout>
       <Breadcrumb>
@@ -17,7 +16,7 @@ const EpisodeDetailPage = ({ episode, review }) => {
       <h1>{review.PodcastEpisodeReviewName}</h1>
       <h3>{review.OverallReviewRating}</h3>
       <p>{review.PodcastEpisodeReviewDescription}</p>
-      <ReviewDetails review={review} />
+      {review.podcast.id === 1 ? <ReviewDetails review={review} /> : <></>}
     </Layout>
   );
 };
