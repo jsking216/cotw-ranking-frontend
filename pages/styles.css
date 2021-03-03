@@ -4,13 +4,17 @@ html {
 }
 
 h1 {
+  color: darkviolet;
   font-weight: 900;
 }
 
-a, a:hover, a:visited, a:link, a:active
-{
+a, a:visited {
   color: darkviolet;
   text-decoration: none;
+}
+
+a:hover, a:link, a:active {
+  color: rgb(123, 2, 175);
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus, .btn-primary:active:focus {

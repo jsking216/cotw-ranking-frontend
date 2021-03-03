@@ -3,6 +3,7 @@ import { fetchAPI } from "../../lib/api";
 import Layout from '../../components/Layout';
 import PodcastEpisodeList from '../../components/PodcastEpisodeList';
 import Link from 'next/link';
+import { Breadcrumb } from "react-bootstrap";
 
 const PodcastDetailPage = ({ podcast, reviews }) => {
   const {
@@ -17,6 +18,10 @@ const PodcastDetailPage = ({ podcast, reviews }) => {
    } = podcast;
   return (
     <Layout>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>{PodcastName}</Breadcrumb.Item>
+      </Breadcrumb>
       <h1>
         <Link href={PodcastUrl}>{PodcastName}</Link>
       </h1>

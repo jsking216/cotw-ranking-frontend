@@ -1,15 +1,15 @@
 import React from "react";
-import Link from "next/link";
 import { ListGroup } from "react-bootstrap";
 
-const EpisodeCard = ({ episode }) => {
+const EpisodeCard = ({ episode, review }) => {
   return (
   <ListGroup.Item>
-    <Link href={`/episodes/${episode.id}`}>
-      <p id="title" className="uk-text-medium">
+    <a href={`/episodes/${episode.id}`}>
+      <p id="title">
         {episode.PodcastEpisodeName}
       </p>
-    </Link>
+    </a>
+    Overall Rating: {Number.parseFloat(review.OverallReviewRating).toFixed(1)}
   </ListGroup.Item>
   );
 };

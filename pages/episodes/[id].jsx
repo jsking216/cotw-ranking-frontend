@@ -1,20 +1,24 @@
 import React from "react";
 import { fetchAPI } from "../../lib/api";
 import ReviewDetails from '../../components/ReviewDetails';
+import Layout from '../../components/Layout';
+import { Breadcrumb } from 'react-bootstrap'
+
 
 const EpisodeDetailPage = ({ episode, review }) => {
-  const {
-    PodcastEpisodeReviewName,
-    OverallReviewRating,
-    PodcastEpisodeReviewDescription,
-  } = review[0];
+  console.log
   return (
-    <>
-      <h1>{PodcastEpisodeReviewName}</h1>
-      <h3>{OverallReviewRating}</h3>
-      <p>{PodcastEpisodeReviewDescription}</p>
-      <ReviewDetails review={review[0]} />
-    </>
+    <Layout>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/podcasts/${review.podcast.id}`}>{review.podcast.PodcastName}</Breadcrumb.Item>
+        <Breadcrumb.Item active>{review.PodcastEpisodeReviewName}</Breadcrumb.Item>
+      </Breadcrumb>
+      <h1>{review.PodcastEpisodeReviewName}</h1>
+      <h3>{review.OverallReviewRating}</h3>
+      <p>{review.PodcastEpisodeReviewDescription}</p>
+      <ReviewDetails review={review} />
+    </Layout>
   );
 };
 
@@ -24,7 +28,7 @@ export async function getStaticProps(context) {
   const review = await fetchAPI(`/podcast-episode-reviews?podcast_episode=${id}`);
   
   return {
-    props: { episode, review },
+    props: { episode, review: {...review[0] } },
     revalidate: 86400,
   };
 }

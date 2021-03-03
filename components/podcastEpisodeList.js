@@ -9,7 +9,7 @@ const PodcastEpisodeList = ({ podcastEpisodes, reviews}) => {
   return (
     <>
       <ListGroup>
-        {ordered.map((episode) => (<EpisodeCard episode={episode} key={episode.id}></EpisodeCard>))}
+        {ordered.map((episode, index) => (<EpisodeCard episode={episode} review={reviews[index]} key={episode.id}></EpisodeCard>))}
       </ListGroup>
     </>
   );
