@@ -1,11 +1,11 @@
 import Header from './Header';
 import Footer from './Footer';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 const Layout = ({ children }) => (
   <>
     <Header />
-    <Container fluid="true">
+    <Container fluid="true" className="marginalized">
       {children}
     </Container>
     <Footer />

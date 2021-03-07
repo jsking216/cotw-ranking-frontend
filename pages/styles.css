@@ -27,6 +27,15 @@ a:hover, a:link, a:active {
   background-color: #e5e4e2;
 }
 
+.marginalized {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.custom-dot-list-style {
+  position: relative !important;
+}
+
 #title {
   font-weight: 600;
 }
