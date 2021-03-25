@@ -2,6 +2,7 @@ import React from "react";
 import { fetchAPI } from "../../lib/api";
 import Layout from '../../components/Layout';
 import PodcastEpisodeList from '../../components/PodcastEpisodeList';
+import RatingChart from '../../components/RatingChart';
 import Link from 'next/link';
 import { Breadcrumb } from "react-bootstrap";
 
@@ -16,6 +17,7 @@ const PodcastDetailPage = ({ podcast, reviews }) => {
     image,
     podcast_episodes,
    } = podcast;
+
   return (
     <Layout>
       <Breadcrumb>
@@ -26,6 +28,7 @@ const PodcastDetailPage = ({ podcast, reviews }) => {
         <Link href={PodcastUrl}>{PodcastName}</Link>
       </h1>
       <p>{PodcastDescription}</p>
+      <RatingChart chartName={`${PodcastName} - Ratings By Episode`} chartData={reviews.map((review) => { return {x: review.id, y: review.OverallReviewRating}})} />
       <PodcastEpisodeList podcastEpisodes={podcast_episodes} reviews={reviews}/>
     </Layout>
   );
