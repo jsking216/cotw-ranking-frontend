@@ -4,9 +4,10 @@ import Layout from '../../components/Layout';
 import PodcastEpisodeList from '../../components/PodcastEpisodeList';
 import RatingChart from '../../components/RatingChart';
 import Link from 'next/link';
-import { Breadcrumb } from "react-bootstrap";
+import NextImage from 'next/image';
+import { Breadcrumb, Row, Col } from "react-bootstrap";
 
-const PodcastDetailPage = ({ podcast, reviews }) => {
+const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
   const {
     PodcastName,
     PodcastDescription,
@@ -28,7 +29,19 @@ const PodcastDetailPage = ({ podcast, reviews }) => {
         <Link href={PodcastUrl}>{PodcastName}</Link>
       </h1>
       <p>{PodcastDescription}</p>
-      <RatingChart chartName={`${PodcastName} - Ratings By Episode`} chartData={reviews.map((review) => { return {x: review.id, y: review.OverallReviewRating}})} />
+      <Row>
+        <Col xs={12} md={8}>
+          <RatingChart chartName={`${PodcastName} - Ratings By Episode`} chartData={reviews.map((review) => { return {x: review.id, y: review.OverallReviewRating}})} />
+        </Col>
+        <Col xs={12} md={4}>
+          <NextImage
+            src={googleImage}
+            width={125}
+            height={125}
+            layout="responsive"
+          />
+        </Col>
+      </Row>
       <PodcastEpisodeList podcastEpisodes={podcast_episodes} reviews={reviews}/>
     </Layout>
   );
@@ -37,9 +50,12 @@ const PodcastDetailPage = ({ podcast, reviews }) => {
 export async function getStaticProps(context) {
   const { slug } = context.params;
   const [podcast, reviews] = await Promise.all([fetchAPI(`/podcasts/${slug}`), fetchAPI(`/podcast-episode-reviews?podcast=${slug}`)]);
+  const queried = podcast.PodcastDescription.split(' ').join('&keywords=').slice(0, 50);
+  const googleImage = await fetch(`http://localhost:3000/api/google-image?keywords=${queried}`);
+  const toJson = await googleImage.json();
 
   return {
-    props: { podcast, reviews },
+    props: { podcast, reviews, googleImage: toJson[0] },
     revalidate: 86400,
   };
 }

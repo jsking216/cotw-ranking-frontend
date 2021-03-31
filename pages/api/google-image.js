@@ -10,6 +10,11 @@ export default async (req, res) => {
 
   switch (method) {
     case 'GET':
+      if(!keywords || typeof keywords === 'undefined' || !Array.isArray(keywords)) {
+        console.log('RETURNING 400!!!!!');
+        res.status(400).end(`Keywords parameter required`);
+        break;
+      }
       // sort words by uniqueness
       const wordUniqueness = [];
       const stream = fs.createReadStream('./pages/api/unigram_freq.csv')
@@ -21,7 +26,7 @@ export default async (req, res) => {
         });
       const end = new Promise(function(resolve, reject) {
         stream.on('end', () => resolve());
-        stream.on('error', reject); // or something like that. might need to close `hash`
+        stream.on('error', reject);
       });
       await end;
       
