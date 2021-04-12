@@ -4,7 +4,6 @@ import Layout from '../../components/Layout';
 import PodcastEpisodeList from '../../components/PodcastEpisodeList';
 import RatingChart from '../../components/RatingChart';
 import Link from 'next/link';
-import NextImage from 'next/image';
 import { Breadcrumb, Row, Col } from "react-bootstrap";
 
 const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
@@ -35,11 +34,10 @@ const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
         </Col>
         <Col xs={12} md={4}>
           Possibly Related Image
-          <NextImage
+          <img
             src={googleImage}
             width={125}
             height={125}
-            layout="responsive"
           />
         </Col>
       </Row>
