@@ -22,7 +22,6 @@ export async function getStaticProps() {
 
   return {
     props: { podcasts, homepage },
-    revalidate: 60,
   };
 }
 

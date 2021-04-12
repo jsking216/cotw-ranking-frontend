@@ -28,7 +28,6 @@ export async function getStaticProps(context) {
   
   return {
     props: { episode, review: {...review[0] } },
-    revalidate: 86400,
   };
 }
 

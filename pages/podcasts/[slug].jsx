@@ -53,7 +53,6 @@ export async function getStaticProps(context) {
 
   return {
     props: { podcast, reviews, googleImage: 'https://via.placeholder.com/300x300.png?text=PoddyRater+Placeholder' },
-    revalidate: 86400,
   };
 }
 
