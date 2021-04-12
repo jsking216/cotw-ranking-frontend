@@ -1,20 +1,13 @@
-import React from "react";
-import Link from "next/link";
+import { Card, Button } from 'react-bootstrap';
 
-const EpisodeCard = ({ episode }) => {
-  return (
-    <Link href={`/episodes/${episode.id}`}>
-      <a className="uk-link-reset">
-        <div className="uk-card uk-card-muted">
-          <div className="uk-card-body">
-            <p id="title" className="uk-text-medium">
-              {episode.PodcastEpisodeName}
-            </p>
-          </div>
-        </div>
-      </a>
-    </Link>
-  );
+const EpisodeCard = ({ episode, review }) => {
+  return (<Card style={{ width: '18rem' }}>
+  <Card.Body>
+    <Card.Title>{episode.PodcastEpisodeName}</Card.Title>
+    <Card.Text>Overall Rating: {Number.parseFloat(review.OverallReviewRating).toFixed(1)}</Card.Text>
+    <Button variant="primary" href={`/episodes/${episode.id}`}>View Rating Details</Button>
+  </Card.Body>
+</Card>);
 };
 
 export default EpisodeCard;

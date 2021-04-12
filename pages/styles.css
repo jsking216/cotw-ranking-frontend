@@ -1,0 +1,41 @@
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+h1 {
+  color: darkviolet;
+  font-weight: 900;
+}
+
+a, a:visited {
+  color: darkviolet;
+  text-decoration: none;
+}
+
+a:hover, a:link, a:active {
+  color: rgb(123, 2, 175);
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus, .btn-primary:active:focus .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  background-color: darkviolet;
+  border-color: darkviolet;
+  color: white !important;
+}
+
+.container {
+  background-color: #e5e4e2;
+}
+
+.marginalized {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.custom-dot-list-style {
+  position: relative !important;
+}
+
+#title {
+  font-weight: 600;
+}

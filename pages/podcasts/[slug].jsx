@@ -1,8 +1,12 @@
 import React from "react";
 import { fetchAPI } from "../../lib/api";
-import PodcastEpisodeList from '../../components/podcastEpisodeList';
+import Layout from '../../components/Layout';
+import PodcastEpisodeList from '../../components/PodcastEpisodeList';
+import RatingChart from '../../components/RatingChart';
+import Link from 'next/link';
+import { Breadcrumb, Row, Col } from "react-bootstrap";
 
-const PodcastDetailPage = ({ podcast }) => {
+const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
   const {
     PodcastName,
     PodcastDescription,
@@ -13,23 +17,42 @@ const PodcastDetailPage = ({ podcast }) => {
     image,
     podcast_episodes,
    } = podcast;
+
   return (
-    <>
-      <h1>{PodcastName}</h1>
-      <h3>{PodcastUrl}</h3>
+    <Layout>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>{PodcastName}</Breadcrumb.Item>
+      </Breadcrumb>
+      <h1>
+        <Link href={PodcastUrl}>{PodcastName}</Link>
+      </h1>
       <p>{PodcastDescription}</p>
-      <PodcastEpisodeList podcastEpisodes={podcast_episodes} />
-    </>
+      <Row>
+        <Col xs={12} md={8}>
+          <RatingChart chartName={`${PodcastName} - Ratings By Episode`} chartData={reviews.map((review) => { return {x: review.id, y: review.OverallReviewRating, name: review.PodcastEpisodeReviewName}})} />
+        </Col>
+        <Col xs={12} md={4}>
+          Possibly Related Image
+          <img
+            src={googleImage}
+            width={125}
+            height={125}
+          />
+        </Col>
+      </Row>
+      <PodcastEpisodeList podcastEpisodes={podcast_episodes} reviews={reviews}/>
+    </Layout>
   );
 };
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
-  const podcast = await fetchAPI(`/podcasts/${slug}`);
+  const [podcast, reviews] = await Promise.all([fetchAPI(`/podcasts/${slug}`), fetchAPI(`/podcast-episode-reviews?podcast=${slug}`)]);
+  const queried = podcast.PodcastDescription.split(' ').join('&keywords=').slice(0, 50);
 
   return {
-    props: { podcast },
-    revalidate: 86400,
+    props: { podcast, reviews, googleImage: 'https://via.placeholder.com/300x300.png?text=PoddyRater+Placeholder' },
   };
 }
 

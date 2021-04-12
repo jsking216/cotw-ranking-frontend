@@ -1,19 +1,14 @@
 import React from "react";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
-import PodcastList from '../components/podcastList';
+import Layout from "../components/Layout";
+import Seo from "../components/Seo";
+import PodcastList from '../components/PodcastList';
 import { fetchAPI } from "../lib/api";
 
 const Home = ({ podcasts, homepage }) => {
   return (
     <Layout categories={podcasts}>
       <Seo seo={homepage.seo} />
-      <div className="uk-section">
-        <div className="uk-container uk-container-small">
-          <h1>{homepage.hero.title}</h1>
-        </div>
-        <PodcastList podcasts={podcasts} />
-      </div>
+      <PodcastList podcasts={podcasts} />
     </Layout>
   );
 };
@@ -27,7 +22,6 @@ export async function getStaticProps() {
 
   return {
     props: { podcasts, homepage },
-    revalidate: 60,
   };
 }
 
