@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build-static": "next build && next export && node ./scripts/generate-sitemap.js && node ./scripts/strip-html-extension.js",
     "start": "next start"
   },
   "dependencies": {

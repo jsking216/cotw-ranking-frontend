@@ -8,7 +8,7 @@ const RatingChart = ({ chartName, chartData }) => {
   const xAxis = [];
   const yAxis = [];
   chartData.sort((a, b) => a.x - b.x).map((point) => {
-    xAxis.push(`Episode ${point.x}`);
+    xAxis.push(point.name);
     yAxis.push(point.y);
   });
   const data = {

@@ -31,9 +31,10 @@ const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
       <p>{PodcastDescription}</p>
       <Row>
         <Col xs={12} md={8}>
-          <RatingChart chartName={`${PodcastName} - Ratings By Episode`} chartData={reviews.map((review) => { return {x: review.id, y: review.OverallReviewRating}})} />
+          <RatingChart chartName={`${PodcastName} - Ratings By Episode`} chartData={reviews.map((review) => { return {x: review.id, y: review.OverallReviewRating, name: review.PodcastEpisodeReviewName}})} />
         </Col>
         <Col xs={12} md={4}>
+          Possibly Related Image
           <NextImage
             src={googleImage}
             width={125}
@@ -51,11 +52,9 @@ export async function getStaticProps(context) {
   const { slug } = context.params;
   const [podcast, reviews] = await Promise.all([fetchAPI(`/podcasts/${slug}`), fetchAPI(`/podcast-episode-reviews?podcast=${slug}`)]);
   const queried = podcast.PodcastDescription.split(' ').join('&keywords=').slice(0, 50);
-  const googleImage = await fetch(`http://localhost:3000/api/google-image?keywords=${queried}`);
-  const toJson = await googleImage.json();
 
   return {
-    props: { podcast, reviews, googleImage: toJson[0] },
+    props: { podcast, reviews, googleImage: 'https://via.placeholder.com/300x300.png?text=PoddyRater+Placeholder' },
     revalidate: 86400,
   };
 }
