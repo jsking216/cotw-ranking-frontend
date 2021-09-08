@@ -1,9 +1,9 @@
 import React from "react";
 import { fetchAPI } from "../../lib/api";
-import Layout from '../../components/Layout';
-import PodcastEpisodeList from '../../components/PodcastEpisodeList';
-import RatingChart from '../../components/RatingChart';
-import Link from 'next/link';
+import Layout from "../../components/Layout";
+import PodcastEpisodeList from "../../components/PodcastEpisodeList";
+import RatingChart from "../../components/RatingChart";
+import Link from "next/link";
 import { Breadcrumb, Row, Col } from "react-bootstrap";
 
 const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
@@ -16,7 +16,7 @@ const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
     updated_at,
     image,
     podcast_episodes,
-   } = podcast;
+  } = podcast;
 
   return (
     <Layout>
@@ -30,36 +30,57 @@ const PodcastDetailPage = ({ podcast, reviews, googleImage }) => {
       <p>{PodcastDescription}</p>
       <Row>
         <Col xs={12} md={8}>
-          <RatingChart chartName={`${PodcastName} - Ratings By Episode`} chartData={reviews.map((review) => { return {x: review.id, y: review.OverallReviewRating, name: review.PodcastEpisodeReviewName}})} />
+          <RatingChart
+            chartName={`${PodcastName} - Ratings By Episode`}
+            chartData={reviews.map((review) => {
+              return {
+                x: review.id,
+                y: review.OverallReviewRating,
+                name: review.PodcastEpisodeReviewName,
+                episode: review.podcast_episode.id,
+              };
+            })}
+          />
         </Col>
         <Col xs={12} md={4}>
           Possibly Related Image
-          <img
-            src={googleImage}
-            width={125}
-            height={125}
-          />
+          <img src={googleImage} width={125} height={125} />
         </Col>
       </Row>
-      <PodcastEpisodeList podcastEpisodes={podcast_episodes} reviews={reviews}/>
+      <PodcastEpisodeList
+        podcastEpisodes={podcast_episodes}
+        reviews={reviews}
+      />
     </Layout>
   );
 };
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
-  const [podcast, reviews] = await Promise.all([fetchAPI(`/podcasts/${slug}`), fetchAPI(`/podcast-episode-reviews?podcast=${slug}`)]);
-  const queried = podcast.PodcastDescription.split(' ').join('&keywords=').slice(0, 50);
+  const [podcast, reviews] = await Promise.all([
+    fetchAPI(`/podcasts/${slug}`),
+    fetchAPI(`/podcast-episode-reviews?podcast=${slug}`),
+  ]);
+  const queried = podcast.PodcastDescription.split(" ")
+    .join("&keywords=")
+    .slice(0, 50);
 
   return {
-    props: { podcast, reviews, googleImage: 'https://via.placeholder.com/300x300.png?text=PoddyRater+Placeholder' },
+    props: {
+      podcast,
+      reviews,
+      googleImage:
+        "https://via.placeholder.com/300x300.png?text=PoddyRater+Placeholder",
+    },
   };
 }
 
 export async function getStaticPaths() {
   // use COUNT API to fetch number of podcasts available
-  const podcastCount = await fetchAPI('/podcasts/count');
-  const paths = Array.from({length: podcastCount}, (_, i) => i + 1).map((item) => ({'params': { 'slug': `${item}`} }));
+  const podcastCount = await fetchAPI("/podcasts/count");
+  const paths = Array.from({ length: podcastCount }, (_, i) => i + 1).map(
+    (item) => ({ params: { slug: `${item}` } })
+  );
 
   return {
     paths,
